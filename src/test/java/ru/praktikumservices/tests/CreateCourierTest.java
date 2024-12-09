@@ -4,6 +4,7 @@ import static ru.praktikumservices.data.Data.*;
 
 import io.restassured.response.Response;
 import org.junit.Test;
+import ru.praktikumservices.steps.CourierSteps;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -11,23 +12,13 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class CreateCourierTest extends TestsSetUp {
 
+    private final CourierSteps courierSteps = new CourierSteps();
 
 
     @Test
     public void courierCanBeCreatedAndDeleted() {
 
-
-        String createRequestBody = "{ \"login\": \"" + login + "\", \"password\": \"" + password + "\", \"firstName\": \"" + firstName + "\" }";
-
-        Response createResponse = given()
-                .header("Content-type", "application/json")
-                .body(createRequestBody)
-                .when()
-                .post("/api/v1/courier");
-
-        createResponse.then()
-                .statusCode(201)
-                .body("ok", equalTo(true));
+        courierSteps.createCourier();
 
         // 2. Логин курьера
         String loginRequestBody = "{ \"login\": \"" + login + "\", \"password\": \"" + password + "\" }";

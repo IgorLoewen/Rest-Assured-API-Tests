@@ -10,22 +10,45 @@ import static ru.praktikumservices.data.Data.*;
 
 public class CourierSteps {
 
-    @Step("Создание курьера с данными по умолчанию")
-    public void createCourier() {
-        // Подготовка тела запроса для создания курьера
+    @Step("Логин курьера с дефолтными данными")
+    public Response loginCourier() {
+        String loginRequestBody = "{ \"login\": \"" + login + "\", \"password\": \"" + password + "\" }";
+
+        return given()
+                .header("Content-type", "application/json")
+                .body(loginRequestBody)
+                .when()
+                .post("/api/v1/courier/login");
+    }
+
+    @Step("Создание курьера с дефолтными данными")
+    public Response createCourier() {
         String createRequestBody = "{ \"login\": \"" + login + "\", \"password\": \"" + password + "\", \"firstName\": \"" + firstName + "\" }";
 
-        // Отправка запроса
-        Response createResponse = given()
+        return given()
                 .header("Content-type", "application/json")
                 .body(createRequestBody)
                 .when()
                 .post("/api/v1/courier");
+    }
 
-        // Проверка, что курьер успешно создан
-        createResponse.then()
-                .statusCode(201)
+    @Step("Удаление курьера с ID: {courierId}")
+    public void deleteCourier(Integer courierId) {
+        given()
+                .header("Content-type", "application/json")
+                .when()
+                .delete("/api/v1/courier/" + courierId)
+                .then()
+                .statusCode(200)
                 .body("ok", equalTo(true));
     }
 
+    @Step("Извлечение ID курьера из ответа логина")
+    public Integer extractCourierId(Response loginResponse) {
+        return loginResponse.then()
+                .statusCode(200)
+                .extract()
+                .path("id");
+    }
 }
+

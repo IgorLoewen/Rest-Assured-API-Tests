@@ -16,40 +16,23 @@ public class CreateCourierTest extends TestsSetUp {
 
 
     @Test
-    public void courierCanBeCreatedAndDeleted() {
+    public void courierCanBeCreatedLoggedAndDeleted() {
+        // Создание курьера
+        Response createResponse = courierSteps.createCourier();
+        createResponse.then().statusCode(201).body("ok", equalTo(true));
 
-        courierSteps.createCourier();
+        // Логин курьера
+        Response loginResponse = courierSteps.loginCourier();
 
-        // 2. Логин курьера
-        String loginRequestBody = "{ \"login\": \"" + login + "\", \"password\": \"" + password + "\" }";
+        // Получение ID курьера
+        Integer courierId = courierSteps.extractCourierId(loginResponse);
 
-        Response loginResponse = given()
-                .header("Content-type", "application/json")
-                .body(loginRequestBody)
-                .when()
-                .post("/api/v1/courier/login");
-
-        // Исправление: используем Integer для ID
-        Integer courierId = loginResponse.then()
-                .statusCode(200)
-                .extract()
-                .path("id");
-
-        // 3. Удаление курьера
-        String deleteRequestBody = "{ \"id\": " + courierId + " }"; // ID передаётся как число
-
-        Response deleteResponse = given()
-                .header("Content-type", "application/json")
-                .body(deleteRequestBody)
-                .when()
-                .delete("/api/v1/courier/" + courierId);
-
-        deleteResponse.then()
-                .statusCode(200)
-                .body("ok", equalTo(true));
+        // Удаление курьера
+        courierSteps.deleteCourier(courierId);
     }
 
-    }
+
+}
 
 
 

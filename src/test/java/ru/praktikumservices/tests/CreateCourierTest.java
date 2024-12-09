@@ -1,5 +1,7 @@
 package ru.praktikumservices.tests;
 
+import static ru.praktikumservices.data.Data.*;
+
 import io.restassured.response.Response;
 import org.junit.Test;
 
@@ -13,10 +15,7 @@ public class CreateCourierTest extends TestsSetUp {
 
     @Test
     public void courierCanBeCreatedAndDeleted() {
-        // 1. Создание курьера
-        String login = "фывапловап";
-        String password = "1234";
-        String firstName = "Test";
+
 
         String createRequestBody = "{ \"login\": \"" + login + "\", \"password\": \"" + password + "\", \"firstName\": \"" + firstName + "\" }";
 

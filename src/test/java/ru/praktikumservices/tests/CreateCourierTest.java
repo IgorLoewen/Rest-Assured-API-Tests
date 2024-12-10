@@ -14,22 +14,22 @@ public class CreateCourierTest extends TestsSetUp {
 
     @Test // курьера можно создать;
     public void courierCanBeCreated() {
-        Response createResponse = courierSteps.createCourier(LOGIN_REQUEST_BODY);
-        createResponse.then().statusCode(201).body("ok", equalTo(true));
+        courierSteps.createCourier(LOGIN_REQUEST_BODY)
+                .then().statusCode(201).body("ok", equalTo(true));
     }
 
     @Test // нельзя создать двух одинаковых курьеров;
     public void courierCanNotBeCreatedTwice() {
         courierSteps.createCourier(LOGIN_REQUEST_BODY);
-        Response secondCreation = courierSteps.createCourier(LOGIN_REQUEST_BODY);
-        secondCreation.then().statusCode(409).body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
+        courierSteps.createCourier(LOGIN_REQUEST_BODY)
+                .then().statusCode(409).body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
 
     @Test // чтобы создать курьера, нужно передать в ручку все обязательные поля;
     public void allRequiredFieldsNeedToBeFilled() {
         for (String body : INVALID_COURIER_REQUEST_BODIES) {
-            Response response = courierSteps.createCourier(body);
-            response.then().statusCode(400).body("message", equalTo("Недостаточно данных для создания учетной записи"));
+            courierSteps.createCourier(body)
+                    .then().statusCode(400).body("message", equalTo("Недостаточно данных для создания учетной записи"));
         }
     }
 
@@ -48,8 +48,8 @@ public class CreateCourierTest extends TestsSetUp {
     @Test // если одного из полей нет, запрос возвращает ошибку;
     public void requestReturnsErrorIfFieldIsMissing() {
         for (String body : MISSING_REQUIRED_FIELDS_REQUEST_BODIES) {
-            Response response = courierSteps.createCourier(body);
-            response.then().statusCode(400).body("message", equalTo("Недостаточно данных для создания учетной записи"));
+            courierSteps.createCourier(body)
+                    .then().statusCode(400).body("message", equalTo("Недостаточно данных для создания учетной записи"));
         }
     }
 

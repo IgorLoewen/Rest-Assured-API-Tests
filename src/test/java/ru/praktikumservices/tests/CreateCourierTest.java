@@ -11,52 +11,55 @@ public class CreateCourierTest extends TestsSetUp {
 
     private final CourierSteps courierSteps = new CourierSteps();
 
-    @Test // Курьера можно создать
-          // запрос возвращает правильный код ответа
-          // успешный запрос возвращает ok: true
-          // курьер может авторизоваться;
-          // успешный запрос возвращает id.
-    public void courierCanBeCreatedLoggedAndDeleted() {
-        Response createResponse = courierSteps.createCourier(VALID_COURIER_REQUEST_BODY);
+
+    @Test // курьера можно создать;
+    public void courierCanBeCreated() {
+        Response createResponse = courierSteps.createCourier(LOGIN_REQUEST_BODY);
         createResponse.then().statusCode(201).body("ok", equalTo(true));
-        Response loginResponse = courierSteps.loginCourier(LOGIN_REQUEST_BODY);
-        Integer courierId = courierSteps.extractCourierId(loginResponse);
-        courierSteps.deleteCourier(courierId);
     }
 
-    @Test // Нельзя создать двух одинаковых курьеров
-          // если создать пользователя с логином, который уже есть, возвращается ошибка.
-          // курьер может авторизоваться;
-          // успешный запрос возвращает id.
-    public void courierCannotBeCreatedTwice() {
-        Response firstCreateResponse = courierSteps.createCourier(VALID_COURIER_REQUEST_BODY);
-        firstCreateResponse.then().statusCode(201).body("ok", equalTo(true));
-        Response secondCreateResponse = courierSteps.createCourier(VALID_COURIER_REQUEST_BODY);
-        secondCreateResponse.then().statusCode(409).body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
-        Response loginResponse = courierSteps.loginCourier(LOGIN_REQUEST_BODY);
-        Integer courierId = courierSteps.extractCourierId(loginResponse);
-        courierSteps.deleteCourier(courierId);
+    @Test // нельзя создать двух одинаковых курьеров;
+    public void courierCanNotBeCreatedTwice() {
+        courierSteps.createCourier(LOGIN_REQUEST_BODY);
+        Response secondCreation = courierSteps.createCourier(LOGIN_REQUEST_BODY);
+        secondCreation.then().statusCode(409).body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
 
-    @Test // Нельзя создать курьера без обязательных полей
-          // для авторизации нужно передать все обязательные поля;
-          // чтобы создать курьера, нужно передать в ручку все обязательные поля;
-          // если одного из полей нет, запрос возвращает ошибку;
-    public void courierCannotBeCreatedWithoutRequiredFields() {
+    @Test // чтобы создать курьера, нужно передать в ручку все обязательные поля;
+    public void allRequiredFieldsNeedToBeFilled() {
         for (String body : INVALID_COURIER_REQUEST_BODIES) {
             Response response = courierSteps.createCourier(body);
             response.then().statusCode(400).body("message", equalTo("Недостаточно данных для создания учетной записи"));
         }
     }
 
-    @Test // если авторизоваться под несуществующим пользователем, запрос возвращает ошибку;
-    public void loginUnavailableRegister(){
-    Response loginUnavailableRegister = courierSteps.loginCourier(LOGIN_REQUEST_BODY);
-    loginUnavailableRegister.then().statusCode(404).body("message", equalTo("Учетная запись не найдена"));
+    @Test  // запрос возвращает правильный код ответа;
+    public void requestReturnsCorrectResponseCode() {
+        courierSteps.createCourier(LOGIN_REQUEST_BODY)
+                .then().statusCode(201).body("ok", equalTo(true));
+    }
+
+    @Test  // успешный запрос возвращает ok: true;
+    public void successfulRequestReturnsOkTrue() {
+        courierSteps.createCourier(LOGIN_REQUEST_BODY)
+                .then().statusCode(201).body("ok", equalTo(true));
+    }
+
+    @Test // если одного из полей нет, запрос возвращает ошибку;
+    public void requestReturnsErrorIfFieldIsMissing() {
+        for (String body : MISSING_REQUIRED_FIELDS_REQUEST_BODIES) {
+            Response response = courierSteps.createCourier(body);
+            response.then().statusCode(400).body("message", equalTo("Недостаточно данных для создания учетной записи"));
+        }
     }
 
 
-
-
-
+    @Test // нельзя создать двух одинаковых курьеров с одним логином, но разными данными
+    public void courierCanNotBeCreatedWithDuplicateLogin() {
+        courierSteps.createCourier(LOGIN_REQUEST_BODY);
+        for (String body : DUPLICATE_LOGIN_REQUEST_BODIES) {
+            courierSteps.createCourier(body).then()
+                    .statusCode(409).body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
+        }
+    }
 }

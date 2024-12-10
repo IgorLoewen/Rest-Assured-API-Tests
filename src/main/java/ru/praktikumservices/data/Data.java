@@ -15,8 +15,8 @@ public class Data {
 
     // Невалидные тела для создания курьера (автоматически генерируются)
     public static final String[] INVALID_COURIER_REQUEST_BODIES = {
-            String.format("{ \"password\": \"%s\", \"firstName\": \"%s\" }", password, firstName), // Нет "login"
-            String.format("{ \"login\": \"%s\", \"firstName\": \"%s\" }", login, firstName),       // Нет "password"
+            String.format("{ \"password\": \"%s\", \"firstName\": \"%s\" }", password, firstName), // Пустой логин
+            String.format("{ \"login\": \"%s\", \"firstName\": \"%s\" }", login, firstName),       // Путой пароль
             "{ \"login\": \"\", \"password\": \"\" }"                                            // Пустые поля
     };
 
@@ -26,4 +26,19 @@ public class Data {
             "{ \"login\": \"%s\", \"password\": \"%s\" }",
             login, password
     );
+
+    // Отсутствие обязательнех полей для создания курьера
+    public static final String[] MISSING_REQUIRED_FIELDS_REQUEST_BODIES = {
+            String.format("{ \"password\": \"%s\", \"firstName\": \"%s\" }", password, firstName), // Нет поля "login"
+            String.format("{ \"login\": \"%s\", \"firstName\": \"%s\" }", login, firstName),       // Нет поля "password"
+            String.format("{ \"firstName\": \"%s\" }", firstName)                                  // Нет полей "login" и "password"
+    };
+
+    public static final String[] DUPLICATE_LOGIN_REQUEST_BODIES = {
+            String.format("{ \"login\": \"%s\", \"password\": \"12345\", \"firstName\": \"Test1\" }", login),
+            String.format("{ \"login\": \"%s\", \"password\": \"123456\", \"firstName\": \"Test2\" }", login),
+            String.format("{ \"login\": \"%s\", \"password\": \"1234\", \"firstName\": \"Test3\" }", login)
+    };
+
+
 }

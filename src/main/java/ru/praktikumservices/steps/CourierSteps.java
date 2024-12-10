@@ -28,7 +28,7 @@ public class CourierSteps {
     }
 
     @Step("Извлечение ID курьера из ответа логина")
-    public Integer extractCourierId(Response loginResponse) {
+    public Integer getCourierId(Response loginResponse) {
         return loginResponse.then()
                 .statusCode(200)
                 .extract()

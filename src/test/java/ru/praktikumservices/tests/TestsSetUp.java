@@ -23,11 +23,11 @@ public class TestsSetUp {
 
             // Проверяем, был ли успешный логин (код 200)
             if (loginResponse.getStatusCode() == 200) {
-                Integer courierId = courierSteps.extractCourierId(loginResponse);
+                Integer courierId = courierSteps.getCourierId(loginResponse);
                 courierSteps.deleteCourier(courierId);
             }
         } catch (Exception e) {
-            // Игнорируем, если что-то пошло не так (например, курьера нет)
+            // Игнорируем, если например, курьера нет
         }
     }
 

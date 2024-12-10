@@ -41,12 +41,19 @@ public class Data {
             String.format("{ \"login\": \"%s\", \"password\": \"1234\", \"firstName\": \"Test3\" }", login)
     };
 
-
+    // набор параметров с пустыми полями для логина
     public static final String[] EMPTY_LOGIN_BODIES = {
             String.format("{ \"password\": \"%s\", \"login\": \"\" }", password), // Пустой логин
             String.format("{ \"login\": \"%s\", \"password\": \"\" }", login),   // Пустой пароль
             "{ \"login\": \"\", \"password\": \"\" }"                           // Оба поля пустые
     };
+
+    // Тела запросов с правильным логином и неправильным паролем, и наоборот
+    public static final String[] INVALID_CREDENTIALS_BODIES = {
+            String.format("{ \"login\": \"%s\", \"password\": \"wrongPassword\" }", login), // Правильный логин, но неправильный пароль
+            String.format("{ \"login\": \"wrongLogin\", \"password\": \"%s\" }", password)  // Неправильный логин, но правильный пароль
+    };
+
 
 
 

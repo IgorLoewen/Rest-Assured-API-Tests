@@ -37,10 +37,10 @@ public class LoginCourierTest extends TestsSetUp{
 
 
     @Test // для авторизации нужно передать все обязательные поля;
-    // если какого-то поля нет, запрос возвращает ошибку;
+          // если какого-то поля нет, запрос возвращает ошибку;
 //       В апидоке ожидается 400 и описан случай, если нет пароля или логина, а не ПОЛЕЙ!!!
 //       В задании написаны 2 выше перечисленных сценария, что подразумевает отсутствие полей
-//            Явная серая зона!  Требует уточнения.  Как по мне так баг задания!
+//            Явная серая зона!  Требует уточнения.  Как по мне так баг задания! Или же отсутствие ОПИСАНИЯ бага при отсутствии поля в запросе!!!
 //             Сделал проверку с пустями полями и проверкой с помощью параметризации!!!
     public void loginRequiresAllRequiredFields(){
            courierSteps.createCourier(LOGIN_REQUEST_BODY);
@@ -50,6 +50,28 @@ public class LoginCourierTest extends TestsSetUp{
            }
        }
 
+     @Test // система вернёт ошибку, если неправильно указать логин или пароль;
+    public void loginFailsWithInvalidCredentials(){
+        courierSteps.createCourier(LOGIN_REQUEST_BODY);
+        for (String body : INVALID_CREDENTIALS_BODIES) {
+            courierSteps.loginCourier(body).then()
+                    .statusCode(404).body("message", equalTo("Учетная запись не найдена"));
+        }
+    }
+
+    @Test // если авторизоваться под несуществующим пользователем, запрос возвращает ошибку;
+    public void loginFailsWithNonExistentUser() {
+        courierSteps.loginCourier(LOGIN_REQUEST_BODY)
+                .then().statusCode(404).body("message", equalTo("Учетная запись не найдена"));
+    }
+
+           // Уточнить тоже. Надо им может ID извлечь числом!!!???
+    @Test // успешный запрос возвращает id.
+    public void successfulRequestReturnsId() {
+        courierSteps.createCourier(LOGIN_REQUEST_BODY);
+        courierSteps.loginCourier(LOGIN_REQUEST_BODY).then()
+                .statusCode(200).body("id", notNullValue());
+    }
 
 
 

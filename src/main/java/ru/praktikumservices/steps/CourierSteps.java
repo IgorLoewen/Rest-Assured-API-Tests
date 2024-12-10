@@ -2,29 +2,24 @@ package ru.praktikumservices.steps;
 
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-import static ru.praktikumservices.data.Data.*;
 
 
 public class CourierSteps {
 
-    @Step("Создание курьера с дефолтными данными")
-    public Response createCourier() {
-        String createRequestBody = "{ \"login\": \"" + login + "\", \"password\": \"" + password + "\", \"firstName\": \"" + firstName + "\" }";
-
+    @Step("Создание курьера с заданным телом запроса")
+    public Response createCourier(String requestBody) {
         return given()
                 .header("Content-type", "application/json")
-                .body(createRequestBody)
+                .body(requestBody)
                 .when()
                 .post("/api/v1/courier");
     }
 
-    @Step("Логин курьера с дефолтными данными")
-    public Response loginCourier() {
-        String loginRequestBody = "{ \"login\": \"" + login + "\", \"password\": \"" + password + "\" }";
-
+    @Step("Логин курьера с заданным телом запроса")
+    public Response loginCourier(String loginRequestBody) {
         return given()
                 .header("Content-type", "application/json")
                 .body(loginRequestBody)
@@ -32,9 +27,7 @@ public class CourierSteps {
                 .post("/api/v1/courier/login");
     }
 
-
-
-    @Step("Извлечение id: курьера из ответа логина")
+    @Step("Извлечение ID курьера из ответа логина")
     public Integer extractCourierId(Response loginResponse) {
         return loginResponse.then()
                 .statusCode(200)
@@ -42,7 +35,7 @@ public class CourierSteps {
                 .path("id");
     }
 
-    @Step("Удаление курьера с id: {courierId}")
+    @Step("Удаление курьера с ID: {courierId}")
     public void deleteCourier(Integer courierId) {
         given()
                 .header("Content-type", "application/json")
@@ -53,4 +46,3 @@ public class CourierSteps {
                 .body("ok", equalTo(true));
     }
 }
-

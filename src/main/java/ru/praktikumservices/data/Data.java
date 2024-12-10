@@ -3,7 +3,7 @@ package ru.praktikumservices.data;
 public class Data {
 
     // Основные данные для курьера
-    public static final String login = "фывапловап";
+    public static final String login = "Игопоорлрь";
     public static final String password = "1234";
     public static final String firstName = "Test";
 
@@ -19,6 +19,7 @@ public class Data {
             String.format("{ \"login\": \"%s\", \"firstName\": \"%s\" }", login, firstName),       // Нет "password"
             "{ \"login\": \"\", \"password\": \"\" }"                                            // Пустые поля
     };
+
 
     // Валидное тело для логина курьера
     public static final String LOGIN_REQUEST_BODY = String.format(

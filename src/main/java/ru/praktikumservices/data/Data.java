@@ -70,6 +70,29 @@ public class Data {
             firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color[0], color[1]
     );
 
+    // Валидные тела для создания заказа с различными вариантами цвета
+    public static final String[] CREATE_ORDER_WITH_OPTIONAL_DIFFERENT_COLORS = {
+            // С одним цветом - BLACK
+            String.format(
+                    "{ \"firstName\": \"%s\", \"lastName\": \"%s\", \"address\": \"%s\", \"metroStation\": %d, \"phone\": \"%s\", \"rentTime\": %d, \"deliveryDate\": \"%s\", \"comment\": \"%s\", \"color\": [\"%s\"] }",
+                    firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color[0]
+            ),
+            // С одним цветом - GREY
+            String.format(
+                    "{ \"firstName\": \"%s\", \"lastName\": \"%s\", \"address\": \"%s\", \"metroStation\": %d, \"phone\": \"%s\", \"rentTime\": %d, \"deliveryDate\": \"%s\", \"comment\": \"%s\", \"color\": [\"%s\"] }",
+                    firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color[1]
+            ),
+            // С двумя цветами - BLACK и GREY
+            String.format(
+                    "{ \"firstName\": \"%s\", \"lastName\": \"%s\", \"address\": \"%s\", \"metroStation\": %d, \"phone\": \"%s\", \"rentTime\": %d, \"deliveryDate\": \"%s\", \"comment\": \"%s\", \"color\": [\"%s\", \"%s\"] }",
+                    firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color[0], color[1]
+            ),
+            // Без указания цвета
+            String.format(
+                    "{ \"firstName\": \"%s\", \"lastName\": \"%s\", \"address\": \"%s\", \"metroStation\": %d, \"phone\": \"%s\", \"rentTime\": %d, \"deliveryDate\": \"%s\", \"comment\": \"%s\" }",
+                    firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment
+            )
+    };
 
 
 }

@@ -16,11 +16,22 @@ public class CreateOrderTest extends TestsSetUp{
 
     private final OrderSteps orderSteps = new OrderSteps();
 
+//В общем надо уточнить!!! Можно ли сделать один тест на все сценарии выбора цветов или
+//    же по одному, как указано по пунктам в задании тренажёра. А так всё готово, можно быстро переделать!
+//    @Test // заказ можно создать;
+//    public void courierCanBeCreated() {
+//        orderSteps.createOrder(CREATE_ORDER_BODY)
+//                .then().statusCode(201).body("track", notNullValue());
+//    }
 
-    @Test // курьера можно создать;
-    public void courierCanBeCreated() {
-        orderSteps.createOrder(CREATE_ORDER_BODY)
-                .then().statusCode(201).body("track", notNullValue());
+    @Test // можно указать один из цветов — BLACK или GREY;
+          //    можно указать оба цвета;
+          //    можно совсем не указывать цвет;
+          //    тело ответа содержит track.
+    public void shouldHandleAllColorCombinationsAndContainTrack(){
+        for (String body : CREATE_ORDER_WITH_OPTIONAL_DIFFERENT_COLORS) {
+            orderSteps.createOrder(body).then().statusCode(201).body("track", notNullValue());
+        }
     }
 
 

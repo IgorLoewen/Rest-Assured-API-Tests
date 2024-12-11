@@ -3,9 +3,19 @@ package ru.praktikumservices.data;
 public class Data {
 
     // Основные данные для курьера
-    public static final String login = "Игорь";
+    public static final String login = "login1234";
     public static final String password = "1234";
-    public static final String firstName = "Test";
+    public static final String firstName = "Игорь";
+    public static final String lastName = "Лёвэн";
+    public static final String address = "пер. Сивцев Вражек 3/18";
+    public static final int metroStation = 4;
+    public static final String phone = "+7 800 355 35 35";
+    public static final int rentTime = 5;
+    public static final String deliveryDate = "2020-06-06";
+    public static final String comment = "I´ll be back.";
+    public static final String[] color = {"BLACK", "GREY"};
+
+
 
     // Валидное тело для создания курьера
     public static final String VALID_COURIER_REQUEST_BODY = String.format(
@@ -54,6 +64,11 @@ public class Data {
             String.format("{ \"login\": \"wrongLogin\", \"password\": \"%s\" }", password)  // Неправильный логин, но правильный пароль
     };
 
+    // Валидное тело для заказа
+    public static final String CREATE_ORDER_BODY = String.format(
+            "{ \"firstName\": \"%s\", \"lastName\": \"%s\", \"address\": \"%s\", \"metroStation\": %d, \"phone\": \"%s\", \"rentTime\": %d, \"deliveryDate\": \"%s\", \"comment\": \"%s\", \"color\": [\"%s\", \"%s\"] }",
+            firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color[0], color[1]
+    );
 
 
 

@@ -19,5 +19,9 @@ public class OrderSteps {
                 .post("/api/v1/orders");
     }
 
+    @Step("Получить список всех заказов в системе")
+    public Response getOrdersList() {
+        return given().when().get("/api/v1/orders");
+    }
 
 }

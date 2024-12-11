@@ -15,6 +15,7 @@ import static ru.praktikumservices.data.Data.*;
 public class CreateOrderTest extends TestsSetUp{
 
     private final OrderSteps orderSteps = new OrderSteps();
+    private final CourierSteps courierSteps = new CourierSteps();
 
 //В общем надо уточнить!!! Можно ли сделать один тест на все сценарии выбора цветов или
 //    же по одному, как указано по пунктам в задании тренажёра. А так всё готово, можно быстро переделать!
@@ -33,6 +34,14 @@ public class CreateOrderTest extends TestsSetUp{
             orderSteps.createOrder(body).then().statusCode(201).body("track", notNullValue());
         }
     }
+
+
+    @Test // Проверь, что в тело ответа возвращается список заказов.
+    public void getOrdersList() {
+        Response orderList = orderSteps.getOrdersList();
+        orderList.then().statusCode(200).body("orders", notNullValue());
+    }
+
 
 
 }

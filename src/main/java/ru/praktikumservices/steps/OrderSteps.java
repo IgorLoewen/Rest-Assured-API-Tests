@@ -21,7 +21,9 @@ public class OrderSteps {
 
     @Step("Получить список всех заказов в системе")
     public Response getOrdersList() {
-        return given().when().get("/api/v1/orders");
+        return given()
+                .when()
+                .get("/api/v1/orders");
     }
 
 }

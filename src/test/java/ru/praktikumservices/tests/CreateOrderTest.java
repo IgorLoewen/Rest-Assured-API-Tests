@@ -38,8 +38,8 @@ public class CreateOrderTest extends TestsSetUp{
 
     @Test // Проверь, что в тело ответа возвращается список заказов.
     public void getOrdersList() {
-        Response orderList = orderSteps.getOrdersList();
-        orderList.then().statusCode(200).body("orders", notNullValue());
+        orderSteps.getOrdersList()
+                .then().statusCode(200).body("orders", notNullValue());
     }
 
 

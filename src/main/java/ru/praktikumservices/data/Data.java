@@ -3,7 +3,7 @@ package ru.praktikumservices.data;
 public class Data {
 
     // Основные данные для курьера
-    public static final String login = "logi6n1234";
+    public static final String login = "lognап1234";
     public static final String password = "1234";
     public static final String firstName = "Игорь";
     public static final String lastName = "Лёвэн";

@@ -1,6 +1,5 @@
 package ru.praktikumservices.tests;
 
-import io.restassured.response.Response;
 import org.junit.Test;
 import ru.praktikumservices.steps.CourierSteps;
 

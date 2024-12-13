@@ -1,11 +1,11 @@
 package ru.praktikumservices.tests;
 
-import io.restassured.response.Response;
 import org.junit.Test;
 import ru.praktikumservices.steps.CourierSteps;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static ru.praktikumservices.data.Data.*;
+
 
 public class CreateCourierTest extends TestsSetUp {
 

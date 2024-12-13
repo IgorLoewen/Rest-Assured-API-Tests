@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 import static io.restassured.RestAssured.given;
+import io.qameta.allure.junit4.AllureJunit4;
 
 
 public class CourierSteps {

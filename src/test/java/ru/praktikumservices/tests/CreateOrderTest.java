@@ -1,13 +1,11 @@
 package ru.praktikumservices.tests;
 
-import io.qameta.allure.Step;
-import io.restassured.response.Response;
+
 import org.junit.Test;
 import ru.praktikumservices.steps.CourierSteps;
 import ru.praktikumservices.steps.OrderSteps;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
+
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static ru.praktikumservices.data.Data.*;
 

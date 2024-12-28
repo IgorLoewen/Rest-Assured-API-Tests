@@ -42,9 +42,11 @@ public class CreateOrderTest extends TestsSetUp{
 
                 .then()
                 .statusCode(200)
-                .body("orders", not(empty()));
-//                решил так проверить.    Почитал, вроде такое решение норм...
-//                Проверяет что массив orders содержит какие то данные и не равен null и так же не пустой
+                .body("orders", not(empty()))
+                .body("orders.id", everyItem(instanceOf(Integer.class)));
+
+//         проверяем, что массив orders содержит данные и не равен null
+//         и дополнительно убеждаемся, что каждое значение в поле id является числом
 
     }*/
 

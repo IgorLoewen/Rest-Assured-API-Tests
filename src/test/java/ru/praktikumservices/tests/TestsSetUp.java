@@ -22,11 +22,12 @@ public class TestsSetUp {
         RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru";
 
 
-        // Регистрируем Listener для Allure
+        // Регистрируем Listener для Allure так как с моим подходом RunWith не работает из за наследований в дальнейшие класс и вызовом здесь анотации для преднастроек и постусловия!
         RunNotifier notifier = new RunNotifier();
         AllureJunit4 allureListener = new AllureJunit4();
-        //org.junit.runner.notification.RunNotifier notifier = new org.junit.runner.notification.RunNotifier();
         notifier.addListener(allureListener);
+
+
         // Сбрасываем состояние login курьера перед каждым тестом
         try {
             Response loginResponse = courierSteps.loginCourier(LOGIN_REQUEST_BODY);
@@ -37,7 +38,7 @@ public class TestsSetUp {
                 courierSteps.deleteCourier(courierId);
             }
         } catch (Exception e) {
-            // Игнорируем, если например, курьера нет
+            // Игнорируем, если например курьера нет
         }
     }
 

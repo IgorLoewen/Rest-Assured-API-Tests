@@ -10,13 +10,16 @@ import io.qameta.allure.junit4.AllureJunit4;
 
 public class CourierSteps {
 
+    private static final String COURIER_ENDPOINT = "/api/v1/courier";
+
+
     @Step("Создание курьера с заданным телом запроса")
     public Response createCourier(String requestBody) {
         return given()
                 .header("Content-type", "application/json")
                 .body(requestBody)
                 .when()
-                .post("/api/v1/courier");
+                .post(COURIER_ENDPOINT);
     }
 
     @Step("Логин курьера с заданным телом запроса")
@@ -25,7 +28,7 @@ public class CourierSteps {
                 .header("Content-type", "application/json")
                 .body(loginRequestBody)
                 .when()
-                .post("/api/v1/courier/login");
+                .post(COURIER_ENDPOINT+"/login");
     }
 
     @Step("Извлечение ID курьера из ответа логина")
@@ -41,7 +44,7 @@ public class CourierSteps {
         given()
                 .header("Content-type", "application/json")
                 .when()
-                .delete("/api/v1/courier/" + courierId)
+                .delete(COURIER_ENDPOINT + "/" + courierId)
                 .then()
                 .statusCode(200)
                 .body("ok", equalTo(true));

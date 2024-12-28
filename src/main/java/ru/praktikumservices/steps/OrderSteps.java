@@ -8,8 +8,7 @@ import static io.restassured.RestAssured.given;
 
 public class OrderSteps {
 
-
-
+    private static final String ORDERS_ENDPOINT = "/api/v1/orders";
 
 
     @Step("Создание заказа с заданным телом запроса")
@@ -18,14 +17,13 @@ public class OrderSteps {
                 .header("Content-type", "application/json")
                 .body(requestBody)
                 .when()
-                .post("/api/v1/orders");
+                .post(ORDERS_ENDPOINT );
     }
 
     @Step("Получить список всех заказов в системе")
     public Response getOrdersList() {
         return given()
                 .when()
-                .get("/api/v1/orders");
+                .get(ORDERS_ENDPOINT );
     }
-
 }

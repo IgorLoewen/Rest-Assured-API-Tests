@@ -1,18 +1,44 @@
 package ru.praktikumservices.tests;
 
 import io.qameta.allure.Feature;
+import io.qameta.allure.junit4.AllureJunit4;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import jdk.jfr.Description;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.notification.RunNotifier;
 import ru.praktikumservices.steps.CourierSteps;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static ru.praktikumservices.data.Data.*;
 
 @Feature("Управление курьерами")
-public class CreateCourierTest extends TestsSetUp {
+public class CreateCourierTest{
 
-    private final CourierSteps courierSteps = new CourierSteps();
+    private CourierSteps courierSteps;
+
+    @Before
+    public void setUp() {
+        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru";
+
+        courierSteps = new CourierSteps();
+
+        // Сбрасываем состояние login курьера перед каждым тестом
+        try {
+            Response loginResponse = courierSteps.loginCourier(LOGIN_REQUEST_BODY);
+
+            // Проверяем, был ли успешный логин (код 200)
+            if (loginResponse.getStatusCode() == 200) {
+                Integer courierId = courierSteps.getCourierId(loginResponse);
+                courierSteps.deleteCourier(courierId);
+            }
+        } catch (Exception e) {
+            // Игнорируем, если например курьера нет
+        }
+    }
+
 
 
     @Test

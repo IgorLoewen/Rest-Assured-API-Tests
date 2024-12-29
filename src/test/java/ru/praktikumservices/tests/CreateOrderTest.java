@@ -3,6 +3,7 @@ package ru.praktikumservices.tests;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.junit4.DisplayName;
+import jdk.jfr.Description;
 import org.junit.Test;
 import ru.praktikumservices.steps.OrderSteps;
 
@@ -22,6 +23,7 @@ public class CreateOrderTest extends TestsSetUp{
            "     можно указать оба цвета;\n" +
            "     можно совсем не указывать цвет;\n" +
            "     тело ответа содержит track.")
+   @Description("Этот тест проверяет возможность указания цвета при создании заказа. Можно выбрать один из цветов (BLACK или GREY), оба цвета, либо вовсе не указывать цвет. В любом случае успешный запрос должен возвращать поле 'track' в ответе.")
     public void shouldHandleAllColorCombinationsAndContainTrack(){
 
         for (String body : CREATE_ORDER_WITH_OPTIONAL_DIFFERENT_COLORS) {
@@ -36,6 +38,7 @@ public class CreateOrderTest extends TestsSetUp{
 ///!!! Ручка слетает переодически Ответ 504 !!! Но тест рабочий.  HTTP чаще ответ возвращает, чем HTTPS
    /*@Test
    @DisplayName("Проверь, что в тело ответа возвращается список заказов.")
+   @Description("Этот тест проверяет, что в ответе на запрос возвращается корректный список заказов. Ожидается, что поле, содержащее заказы, присутствует и содержит данные в правильном формате.")
     public void getOrdersList() {
 
         orderSteps.getOrdersList()
@@ -49,6 +52,9 @@ public class CreateOrderTest extends TestsSetUp{
 //         и дополнительно убеждаемся, что каждое значение в поле id является числом
 
     }*/
+
+
+
 
 
 }

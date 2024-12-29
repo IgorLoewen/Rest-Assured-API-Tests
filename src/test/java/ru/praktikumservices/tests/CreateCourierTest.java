@@ -2,6 +2,7 @@ package ru.praktikumservices.tests;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.junit4.DisplayName;
+import jdk.jfr.Description;
 import org.junit.Test;
 import ru.praktikumservices.steps.CourierSteps;
 
@@ -16,6 +17,7 @@ public class CreateCourierTest extends TestsSetUp {
 
     @Test
     @DisplayName ("курьера можно создать;")
+    @Description("Этот тест проверяет возможность создания курьера с валидными данными.")
     public void courierCanBeCreated() {
 
         courierSteps.createCourier(LOGIN_REQUEST_BODY)
@@ -27,6 +29,7 @@ public class CreateCourierTest extends TestsSetUp {
 
     @Test
     @DisplayName ("нельзя создать двух одинаковых курьеров;")
+    @Description("Этот тест проверяет, что невозможно создать двух курьеров с одинаковыми данными. Ожидается, что при попытке создания второго курьера будет возвращён соответствующий код ошибки.")
     public void courierCanNotBeCreatedTwice() {
 
         courierSteps.createCourier(LOGIN_REQUEST_BODY);
@@ -39,6 +42,7 @@ public class CreateCourierTest extends TestsSetUp {
 
     @Test
     @DisplayName ("чтобы создать курьера, нужно передать в ручку все обязательные поля;")
+    @Description("Этот тест проверяет, что для создания курьера необходимо указать все обязательные поля. Если какое-либо из обязательных полей отсутствует, запрос должен вернуть ошибку.")
     public void allRequiredFieldsNeedToBeFilled() {
 
         for (String body : INVALID_COURIER_REQUEST_BODIES) {
@@ -50,30 +54,11 @@ public class CreateCourierTest extends TestsSetUp {
         }
     }
 
-    @Test
-    @DisplayName ("запрос возвращает правильный код ответа;")
-    public void requestReturnsCorrectResponseCode() {
 
-        courierSteps.createCourier(LOGIN_REQUEST_BODY)
-
-                .then()
-                .statusCode(201)
-                .body("ok", equalTo(true));
-    }
-
-    @Test
-    @DisplayName ("успешный запрос возвращает ok: true;")
-    public void successfulRequestReturnsOkTrue() {
-
-        courierSteps.createCourier(LOGIN_REQUEST_BODY)
-
-                .then()
-                .statusCode(201)
-                .body("ok", equalTo(true));
-    }
 
     @Test
     @DisplayName ("если одного из полей нет, запрос возвращает ошибку;")
+    @Description("Этот тест проверяет, что запрос на создание курьера возвращает ошибку, если отсутствует одно из обязательных полей. Ожидается соответствующий код ошибки и сообщение об ошибке в ответе.")
     public void requestReturnsErrorIfFieldIsMissing() {
 
         for (String body : MISSING_REQUIRED_FIELDS_REQUEST_BODIES) {
@@ -88,6 +73,7 @@ public class CreateCourierTest extends TestsSetUp {
 
     @Test
     @DisplayName ("нельзя создать двух одинаковых курьеров с одним логином, но разными данными")
+    @Description("Этот тест проверяет, что невозможно создать двух курьеров с одинаковым логином, но разными остальными данными. Ожидается, что запрос на создание второго курьера вернёт ошибку, так как логин должен быть уникальным.")
     public void courierCanNotBeCreatedWithDuplicateLogin() {
 
         courierSteps.createCourier(LOGIN_REQUEST_BODY);

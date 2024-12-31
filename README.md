@@ -47,3 +47,9 @@
    ```bash
    mvn allure:serve
    ```
+
+
+Добавляем результаты отчётов, когда их надо запушить насильно
+ ```bash
+  git add -f ./target/allure-results/
+   ```

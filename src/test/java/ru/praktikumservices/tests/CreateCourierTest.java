@@ -1,8 +1,6 @@
 package ru.praktikumservices.tests;
 
 import io.qameta.allure.Epic;
-
-import io.qameta.allure.Story;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

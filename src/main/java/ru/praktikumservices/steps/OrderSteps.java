@@ -14,7 +14,7 @@ public class OrderSteps {
     public Response createOrder(OrderModel order) {
         return given()
                 .header("Content-type", "application/json")
-                .body(order) // Jackson автоматически преобразует объект в JSON
+                .body(order)
                 .when()
                 .post(ORDERS_ENDPOINT);
     }

@@ -29,13 +29,9 @@ public class OrderTestData {
     // Валидные тела для создания заказа с различными вариантами цвета
     public static List<OrderModel> getOrdersWithOptionalColors() {
         return Arrays.asList(
-                // С одним цветом - BLACK
                 new OrderModel(FIRST_NAME, LAST_NAME, ADDRESS, METRO_STATION, PHONE, RENT_TIME, DELIVERY_DATE, COMMENT, Arrays.asList(COLOR[0])),
-                // С одним цветом - GREY
                 new OrderModel(FIRST_NAME, LAST_NAME, ADDRESS, METRO_STATION, PHONE, RENT_TIME, DELIVERY_DATE, COMMENT, Arrays.asList(COLOR[1])),
-                // С двумя цветами - BLACK и GREY
                 new OrderModel(FIRST_NAME, LAST_NAME, ADDRESS, METRO_STATION, PHONE, RENT_TIME, DELIVERY_DATE, COMMENT, Arrays.asList(COLOR)),
-                // Без указания цвета
                 new OrderModel(FIRST_NAME, LAST_NAME, ADDRESS, METRO_STATION, PHONE, RENT_TIME, DELIVERY_DATE, COMMENT, null)
         );
     }

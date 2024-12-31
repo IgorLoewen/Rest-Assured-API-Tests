@@ -7,8 +7,11 @@ import java.util.List;
 
 public class CourierTestData {
 
+    // Главный url
+    public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru";
+
     // Основные данные для курьера
-    public static final String LOGIN = "sfddываfgdgfgsdf";
+    public static final String LOGIN = "п53ывап";
     public static final String PASSWORD = "1234";
     public static final String FIRST_NAME = "Игорь";
 
@@ -20,9 +23,9 @@ public class CourierTestData {
     // Пустые тела для создания курьера. Разные варианты наборов для теста
     public static List<CourierModel> getInvalidCourierBodies() {
         return Arrays.asList(
-                new CourierModel(null, PASSWORD, FIRST_NAME), // Пустой логин
-                new CourierModel(LOGIN, null, FIRST_NAME),   // Пустой пароль
-                new CourierModel("", "", "")                 // Все поля пустые
+                new CourierModel(null, PASSWORD, FIRST_NAME),
+                new CourierModel(LOGIN, null, FIRST_NAME),
+                new CourierModel("", "", "")
         );
     }
 
@@ -34,9 +37,9 @@ public class CourierTestData {
     // Отсутствие обязательных полей для тестирования
     public static List<CourierModel> getMissingRequiredFields() {
         return Arrays.asList(
-                new CourierModel(null, PASSWORD, FIRST_NAME), // Нет поля "login"
-                new CourierModel(LOGIN, null, FIRST_NAME),    // Нет поля "password"
-                new CourierModel(null, null, null)           // Все поля отсутствуют
+                new CourierModel(null, PASSWORD, FIRST_NAME),
+                new CourierModel(LOGIN, null, FIRST_NAME),
+                new CourierModel(null, null, null)
         );
     }
 

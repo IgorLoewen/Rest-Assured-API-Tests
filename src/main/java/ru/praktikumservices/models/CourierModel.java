@@ -10,7 +10,8 @@ public class CourierModel {
     private String firstName;
 
     // Конструктор без параметров (нужен для сериализации/десериализации)
-    public CourierModel() {}
+    public CourierModel() {
+    }
 
     // Конструктор с основными параметрами
     public CourierModel(String login, String password, String firstName) {
@@ -46,10 +47,15 @@ public class CourierModel {
 
     @Override
     public String toString() {
+
+        // Метод toString используется для удобного отображения информации об объекте.
+        // Это полезно, например, в логах, отладке, а также для генерации описания параметров тестов,
+        // которое будет отображаться в отчетах, таких как Allure.
         return "CourierModel{" +
                 "login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 '}';
     }
+
 }

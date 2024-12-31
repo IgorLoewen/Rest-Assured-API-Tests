@@ -11,11 +11,11 @@ public class CourierSteps {
 
     private static final String COURIER_ENDPOINT = "/api/v1/courier";
 
-    @Step("Создание курьера с заданным объектом CourierModel")
+    @Step("Создание курьера с параметрами: {courier}")
     public Response createCourier(CourierModel courier) {
         return given()
                 .header("Content-type", "application/json")
-                .body(courier) // Jackson автоматически преобразует объект в JSON
+                .body(courier)
                 .when()
                 .post(COURIER_ENDPOINT);
     }
@@ -24,7 +24,7 @@ public class CourierSteps {
     public static Response loginCourier(CourierModel courier) {
         return given()
                 .header("Content-type", "application/json")
-                .body(courier) // Jackson автоматически преобразует объект в JSON
+                .body(courier)
                 .when()
                 .post(COURIER_ENDPOINT + "/login");
     }

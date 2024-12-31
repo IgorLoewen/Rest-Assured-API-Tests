@@ -40,7 +40,7 @@
 
 2. Сгенерировать отчет Allure:
    ```bash
-   mvn allure:report
+   mvn allure:report 
    ```
 
 3. Отчет будет сохранен в папке `target`. Чтобы открыть отчет локально:

@@ -2,6 +2,7 @@ package ru.praktikumservices.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.Arrays;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL) // Исключает null-поля из JSON
@@ -109,6 +110,10 @@ public class OrderModel {
 
     @Override
     public String toString() {
+        // Метод toString используется для удобного отображения информации об объекте.
+        // Это полезно, например, в логах, отладке, а также для генерации описания параметров тестов,
+        // которое будет отображаться в отчетах, таких как Allure.
+
         return "OrderModel{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -121,4 +126,7 @@ public class OrderModel {
                 ", color=" + color +
                 '}';
     }
+
+
+
 }

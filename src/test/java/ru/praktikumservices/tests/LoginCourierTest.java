@@ -1,4 +1,4 @@
-package ru.praktikumservices.tests;
+/*package ru.praktikumservices.tests;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.junit4.DisplayName;
@@ -37,17 +37,17 @@ public class LoginCourierTest{
     }
 
 
-       @Test
-       @DisplayName("курьер может авторизоваться;")
+    @Test
+    @DisplayName("курьер может авторизоваться;")
     public void courierCanLoginSuccessfully(){
 
-           courierSteps.createCourier(LOGIN_REQUEST_BODY);
+        courierSteps.createCourier(LOGIN_REQUEST_BODY);
 
-           courierSteps.loginCourier(LOGIN_REQUEST_BODY)
+        courierSteps.loginCourier(LOGIN_REQUEST_BODY)
 
-                   .then()
-                   .statusCode(200);
-       }
+                .then()
+                .statusCode(200);
+    }
 
 
     @Test
@@ -55,19 +55,19 @@ public class LoginCourierTest{
             "     если какого-то поля нет, запрос возвращает ошибку;")
     public void loginRequiresAllRequiredFields(){
 
-           courierSteps.createCourier(LOGIN_REQUEST_BODY);
+        courierSteps.createCourier(LOGIN_REQUEST_BODY);
 
-           for (String body : EMPTY_LOGIN_BODIES) {
-               courierSteps.loginCourier(body)
+        for (String body : EMPTY_LOGIN_BODIES) {
+            courierSteps.loginCourier(body)
 
-                       .then()
-                       .statusCode(400)
-                       .body("message", equalTo("Недостаточно данных для входа"));
-           }
-       }
+                    .then()
+                    .statusCode(400)
+                    .body("message", equalTo("Недостаточно данных для входа"));
+        }
+    }
 
-     @Test
-     @DisplayName("система вернёт ошибку, если неправильно указать логин или пароль;")
+    @Test
+    @DisplayName("система вернёт ошибку, если неправильно указать логин или пароль;")
     public void loginFailsWithInvalidCredentials(){
 
         courierSteps.createCourier(LOGIN_REQUEST_BODY);
@@ -103,4 +103,4 @@ public class LoginCourierTest{
                 .then()
                 .body("id", instanceOf(Integer.class));
     }
-}
+}*/

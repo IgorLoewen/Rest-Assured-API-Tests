@@ -2,33 +2,31 @@ package ru.praktikumservices.steps;
 
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import static org.hamcrest.CoreMatchers.equalTo;
+import ru.praktikumservices.models.CourierModel;
 
 import static io.restassured.RestAssured.given;
-import io.qameta.allure.junit4.AllureJunit4;
-
+import static org.hamcrest.CoreMatchers.equalTo;
 
 public class CourierSteps {
 
     private static final String COURIER_ENDPOINT = "/api/v1/courier";
 
-
-    @Step("Создание курьера с заданным телом запроса")
-    public Response createCourier(String requestBody) {
+    @Step("Создание курьера с заданным объектом CourierModel")
+    public Response createCourier(CourierModel courier) {
         return given()
                 .header("Content-type", "application/json")
-                .body(requestBody)
+                .body(courier) // Jackson автоматически преобразует объект в JSON
                 .when()
                 .post(COURIER_ENDPOINT);
     }
 
-    @Step("Логин курьера с заданным телом запроса")
-    public Response loginCourier(String loginRequestBody) {
+    @Step("Логин курьера с заданным объектом CourierModel")
+    public static Response loginCourier(CourierModel courier) {
         return given()
                 .header("Content-type", "application/json")
-                .body(loginRequestBody)
+                .body(courier) // Jackson автоматически преобразует объект в JSON
                 .when()
-                .post(COURIER_ENDPOINT+"/login");
+                .post(COURIER_ENDPOINT + "/login");
     }
 
     @Step("Извлечение ID курьера из ответа логина")

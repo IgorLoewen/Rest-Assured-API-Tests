@@ -12,6 +12,8 @@ import ru.praktikumservices.data.CourierTestData;
 import ru.praktikumservices.models.CourierModel;
 import ru.praktikumservices.steps.CourierSteps;
 
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 
@@ -38,7 +40,7 @@ public class LoginCourierTest {
         CourierSteps.loginCourier(courier)
 
                 .then()
-                .statusCode(200)
+                .statusCode(SC_OK)
                 .body("id", instanceOf(Integer.class));
     }
 
@@ -52,7 +54,7 @@ public class LoginCourierTest {
         CourierSteps.loginCourier(notRegisteredCourier)
 
                 .then()
-                .statusCode(404)
+                .statusCode(SC_NOT_FOUND)
                 .body("message", equalTo("Учетная запись не найдена"));
     }
 

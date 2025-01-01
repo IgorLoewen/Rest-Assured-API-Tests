@@ -15,6 +15,7 @@ import ru.praktikumservices.steps.CourierSteps;
 
 import java.util.Collection;
 
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 @Epic("Параметризованные тесты: Логин курьера")
@@ -50,7 +51,7 @@ public class ParameterizedLoginInvalidDataTest {
 
         Response response = courierSteps.loginCourier(invalidCourier);
         response.then()
-                .statusCode(400)
+                .statusCode(SC_BAD_REQUEST)
                 .body("message", equalTo("Недостаточно данных для входа"));
     }
 

@@ -13,6 +13,7 @@ import ru.praktikumservices.models.CourierModel;
 import ru.praktikumservices.steps.CourierSteps;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.apache.http.HttpStatus.*;
 
 @Epic("Управление курьерами")
 public class CreateCourierTest {
@@ -33,7 +34,7 @@ public class CreateCourierTest {
 
         courierSteps.createCourier(courier)
                 .then()
-                .statusCode(201)
+                .statusCode(SC_CREATED)
                 .body("ok", equalTo(true));
     }
 
@@ -46,7 +47,7 @@ public class CreateCourierTest {
         courierSteps.createCourier(courier);
         courierSteps.createCourier(courier)
                 .then()
-                .statusCode(409)
+                .statusCode(SC_CONFLICT)
                 .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
 

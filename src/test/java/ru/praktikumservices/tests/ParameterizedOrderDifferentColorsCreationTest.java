@@ -14,6 +14,7 @@ import ru.praktikumservices.steps.OrderSteps;
 
 import java.util.Collection;
 
+import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.hamcrest.CoreMatchers.instanceOf;
 
 @Epic("Создание заказов с различными цветами")
@@ -44,7 +45,7 @@ public class ParameterizedOrderDifferentColorsCreationTest {
 
         Response response = orderSteps.createOrder(order);
         response.then()
-                .statusCode(201)
+                .statusCode(SC_CREATED)
                 .body("track", instanceOf(Integer.class));
 
         Integer orderId = orderSteps.getOrderId(response);

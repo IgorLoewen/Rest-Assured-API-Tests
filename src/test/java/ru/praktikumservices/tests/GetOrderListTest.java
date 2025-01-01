@@ -10,6 +10,7 @@ import ru.praktikumservices.data.OrderTestData;
 import ru.praktikumservices.steps.OrderSteps;
 
 import static io.qameta.allure.internal.shadowed.jackson.core.JsonPointer.empty;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.everyItem;
@@ -27,19 +28,19 @@ public class GetOrderListTest {
 
 
     /// !!! Ручка слетает переодически Ответ 504 !!! Но тест рабочий.  HTTP чаще ответ возвращает, чем HTTPS
-//    @Test
-//    @DisplayName("Проверь, что в тело ответа возвращается список заказов.")
-//    @Description("Этот тест проверяет, что в ответе на запрос возвращается корректный список заказов. Ожидается, что поле, содержащее заказы, присутствует и содержит данные в правильном формате.")
-//    public void getOrdersList() {
-//
-//        orderSteps.getOrdersList()
-//
-//                .then()
-//                .statusCode(200)
-//                .body("orders", not(empty()))
-//                .body("orders.id", everyItem(instanceOf(Integer.class)));
-//
-//    }
+    @Test
+    @DisplayName("Проверь, что в тело ответа возвращается список заказов.")
+    @Description("Этот тест проверяет, что в ответе на запрос возвращается корректный список заказов. Ожидается, что поле, содержащее заказы, присутствует и содержит данные в правильном формате.")
+    public void getOrdersList() {
+
+        orderSteps.getOrdersList()
+
+                .then()
+                .statusCode(SC_OK)
+                .body("orders", not(empty()))
+                .body("orders.id", everyItem(instanceOf(Integer.class)));
+
+    }
 
 
 }

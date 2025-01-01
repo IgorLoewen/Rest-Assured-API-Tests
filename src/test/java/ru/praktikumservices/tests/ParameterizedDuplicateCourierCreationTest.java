@@ -15,6 +15,7 @@ import ru.praktikumservices.steps.CourierSteps;
 
 import java.util.Collection;
 
+import static org.apache.http.HttpStatus.SC_CONFLICT;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 @Epic("Параметризованные тесты: Дублирующий логин")
@@ -46,7 +47,7 @@ public class ParameterizedDuplicateCourierCreationTest {
     public void validateDuplicateLogin() {
         courierSteps.createCourier(duplicateCourier)
                 .then()
-                .statusCode(409)
+                .statusCode(SC_CONFLICT)
                 .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
 

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 @Epic("Параметризованные тесты: Создание курьера")
@@ -50,7 +51,7 @@ public class ParameterizedCourierCreationTest {
 
         Response response = courierSteps.createCourier(courier);
         response.then()
-                .statusCode(400)
+                .statusCode(SC_BAD_REQUEST)
                 .body("message", equalTo("Недостаточно данных для создания учетной записи"));
     }
 }

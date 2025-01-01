@@ -1,7 +1,7 @@
 package ru.praktikumservices.tests;
 
 import io.qameta.allure.Description;
-import io.qameta.allure.Feature;
+import io.qameta.allure.Epic;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Before;
@@ -18,7 +18,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
-@Feature("Параметризованные тесты: Создание курьера")
+@Epic("Параметризованные тесты: Создание курьера")
 @RunWith(Parameterized.class)
 public class ParameterizedCourierCreationTest {
 

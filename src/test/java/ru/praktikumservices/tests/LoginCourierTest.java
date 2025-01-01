@@ -1,9 +1,6 @@
 package ru.praktikumservices.tests;
 
-import io.qameta.allure.Feature;
-import io.qameta.allure.junit4.DisplayName;
-
-import io.qameta.allure.Feature;
+import io.qameta.allure.Epic;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -15,11 +12,11 @@ import ru.praktikumservices.data.CourierTestData;
 import ru.praktikumservices.models.CourierModel;
 import ru.praktikumservices.steps.CourierSteps;
 
-import static com.fasterxml.jackson.databind.cfg.ConfigOverride.empty;
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
 
-@Feature("Авторизация курьеров")
+
+@Epic("Авторизация курьеров")
 public class LoginCourierTest {
 
     private CourierSteps courierSteps;
@@ -33,17 +30,31 @@ public class LoginCourierTest {
         courierSteps.createCourier(courier);
     }
 
-@Test
-@DisplayName("Курьер может авторизоваться")
-@Description("Этот тест проверяет возможность логина курьера с валидными данными.")
-public void courierCanBeCreated() {
+    @Test
+    @DisplayName("Курьер может авторизоваться")
+    @Description("Этот тест проверяет возможность логина курьера с валидными данными.")
+    public void courierCanLogin() {
 
         CourierSteps.loginCourier(courier)
 
                 .then()
                 .statusCode(200)
                 .body("id", instanceOf(Integer.class));
-}
+    }
+
+    @Test
+    @DisplayName("если авторизоваться под несуществующим пользователем, запрос возвращает ошибку;")
+    @Description("Этот тест проверяет ошибку логина курьера с несуществующими пользователем.")
+    public void courierCanNotLoginWithoutRegistration() {
+
+        CourierModel notRegisteredCourier = CourierTestData.getNotRegisteredCourier();
+
+        CourierSteps.loginCourier(notRegisteredCourier)
+
+                .then()
+                .statusCode(404)
+                .body("message", equalTo("Учетная запись не найдена"));
+    }
 
 
     @After

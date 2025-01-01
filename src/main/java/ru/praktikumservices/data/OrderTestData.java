@@ -1,6 +1,5 @@
 package ru.praktikumservices.data;
 
-import io.restassured.RestAssured;
 import ru.praktikumservices.models.OrderModel;
 
 import java.util.Arrays;

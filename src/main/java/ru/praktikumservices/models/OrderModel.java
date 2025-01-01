@@ -2,7 +2,6 @@ package ru.praktikumservices.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.util.Arrays;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL) // Исключает null-поля из JSON
@@ -19,7 +18,8 @@ public class OrderModel {
     private List<String> color;
 
     // Конструктор без параметров (нужен для сериализации/десериализации)
-    public OrderModel() {}
+    public OrderModel() {
+    }
 
     // Конструктор с полным набором параметров
     public OrderModel(String firstName, String lastName, String address, Integer metroStation,
@@ -126,7 +126,6 @@ public class OrderModel {
                 ", color=" + color +
                 '}';
     }
-
 
 
 }

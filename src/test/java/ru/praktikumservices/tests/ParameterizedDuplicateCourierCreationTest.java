@@ -1,7 +1,7 @@
 package ru.praktikumservices.tests;
 
 import io.qameta.allure.Description;
-import io.qameta.allure.Feature;
+import io.qameta.allure.Epic;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.After;
@@ -17,7 +17,7 @@ import java.util.Collection;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
-@Feature("Параметризованные тесты: Дублирующий логин")
+@Epic("Параметризованные тесты: Дублирующий логин")
 @RunWith(Parameterized.class)
 public class ParameterizedDuplicateCourierCreationTest {
 

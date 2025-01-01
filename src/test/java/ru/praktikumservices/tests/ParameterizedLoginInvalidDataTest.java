@@ -1,7 +1,7 @@
 package ru.praktikumservices.tests;
 
 import io.qameta.allure.Description;
-import io.qameta.allure.Feature;
+import io.qameta.allure.Epic;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.After;
@@ -13,13 +13,11 @@ import ru.praktikumservices.data.CourierTestData;
 import ru.praktikumservices.models.CourierModel;
 import ru.praktikumservices.steps.CourierSteps;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
-@Feature("Параметризованные тесты: Логин курьера")
+@Epic("Параметризованные тесты: Логин курьера")
 @RunWith(Parameterized.class)
 public class ParameterizedLoginInvalidDataTest {
 

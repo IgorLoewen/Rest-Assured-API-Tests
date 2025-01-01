@@ -1,7 +1,7 @@
 package ru.praktikumservices.tests;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
-import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Before;
@@ -27,7 +27,7 @@ public class ParameterizedOrderDifferentColorsCreationTest {
         this.order = order;
     }
 
-    @Parameterized.Parameters(name = "Тест {index}: Цвета {0}")
+    @Parameterized.Parameters(name = "Тест {index}: {0}")
     public static Collection<OrderModel> testData() {
         return ru.praktikumservices.data.OrderTestData.getOrdersWithOptionalColors();
     }
@@ -39,7 +39,7 @@ public class ParameterizedOrderDifferentColorsCreationTest {
     }
 
     @Test
-    @DisplayName("Создание заказа с различными цветами")
+    @Description("Тест проверяет создание заказа с разными комбинациями.")
     public void shouldCreateOrderWithDifferentColors() {
 
         Response response = orderSteps.createOrder(order);

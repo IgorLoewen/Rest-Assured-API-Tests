@@ -51,4 +51,9 @@ public class CourierTestData {
                 new CourierModel(LOGIN, PASSWORD, "Test3")
         );
     }
+
+    // Тело для логина незарегистрированного курьера
+    public static CourierModel getNotRegisteredCourier() {
+        return new CourierModel("Васёк", PASSWORD, FIRST_NAME);
+    }
 }

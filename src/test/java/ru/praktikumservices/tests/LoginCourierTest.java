@@ -39,9 +39,7 @@ public class LoginCourierTest {
 
         CourierSteps.loginCourier(courier)
 
-                .then()
-                .statusCode(SC_OK)
-                .body("id", instanceOf(Integer.class));
+                .then().statusCode(SC_OK).body("id", instanceOf(Integer.class));
     }
 
     @Test
@@ -49,13 +47,21 @@ public class LoginCourierTest {
     @Description("Этот тест проверяет ошибку логина курьера с несуществующими пользователем.")
     public void courierCanNotLoginWithoutRegistration() {
 
-        CourierModel notRegisteredCourier = CourierTestData.getNotRegisteredCourier();
+        CourierModel notRegisteredCourier = CourierTestData.getCourierWithInvalidLogin();
 
         CourierSteps.loginCourier(notRegisteredCourier)
 
-                .then()
-                .statusCode(SC_NOT_FOUND)
-                .body("message", equalTo("Учетная запись не найдена"));
+                .then().statusCode(SC_NOT_FOUND).body("message", equalTo("Учетная запись не найдена"));
+    }
+
+    @Test
+    @DisplayName("если авторизоваться с неверным паролем, запрос возвращает ошибку")
+    @Description("Этот тест проверяет ошибку логина курьера с неверным паролем.")
+    public void courierCanNotLoginWithInvalidPassword() {
+
+        CourierModel courierWithInvalidPassword = CourierTestData.getCourierWithInvalidPassword();
+
+        CourierSteps.loginCourier(courierWithInvalidPassword).then().statusCode(SC_NOT_FOUND).body("message", equalTo("Учетная запись не найдена"));
     }
 
 

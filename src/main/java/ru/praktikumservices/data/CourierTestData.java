@@ -52,8 +52,13 @@ public class CourierTestData {
         );
     }
 
-    // Тело для логина незарегистрированного курьера
-    public static CourierModel getNotRegisteredCourier() {
-        return new CourierModel("Васёк", PASSWORD, FIRST_NAME);
+    // Тело для логина с неправильным логином
+    public static CourierModel getCourierWithInvalidLogin() {
+        return new CourierModel("несуществующийЛогин", PASSWORD, FIRST_NAME);
+    }
+
+    // Тело для логина с неправильным паролем
+    public static CourierModel getCourierWithInvalidPassword() {
+        return new CourierModel(LOGIN, "неправильныйПароль", FIRST_NAME);
     }
 }

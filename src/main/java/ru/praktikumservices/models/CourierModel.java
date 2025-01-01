@@ -51,11 +51,7 @@ public class CourierModel {
         // Метод toString используется для удобного отображения информации об объекте.
         // Это полезно, например, в логах, отладке, а также для генерации описания параметров тестов,
         // которое будет отображаться в отчетах, таких как Allure.
-        return "CourierModel{" +
-                "login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                '}';
+        return "CourierModel{" + "login='" + login + '\'' + ", password='" + password + '\'' + ", firstName='" + firstName + '\'' + '}';
     }
 
 }

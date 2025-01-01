@@ -45,10 +45,7 @@ public class ParameterizedDuplicateCourierCreationTest {
     @Test
     @Description("Этот тест проверяет, что невозможно создать двух курьеров с одинаковым логином, но разными остальными данными.")
     public void validateDuplicateLogin() {
-        courierSteps.createCourier(duplicateCourier)
-                .then()
-                .statusCode(SC_CONFLICT)
-                .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
+        courierSteps.createCourier(duplicateCourier).then().statusCode(SC_CONFLICT).body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
 
     @After

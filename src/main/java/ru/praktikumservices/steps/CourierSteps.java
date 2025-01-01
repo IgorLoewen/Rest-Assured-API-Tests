@@ -13,38 +13,21 @@ public class CourierSteps {
 
     @Step("Создание курьера с параметрами: {courier}")
     public Response createCourier(CourierModel courier) {
-        return given()
-                .header("Content-type", "application/json")
-                .body(courier)
-                .when()
-                .post(COURIER_ENDPOINT);
+        return given().header("Content-type", "application/json").body(courier).when().post(COURIER_ENDPOINT);
     }
 
     @Step("Логин курьера с заданным объектом CourierModel")
     public static Response loginCourier(CourierModel courier) {
-        return given()
-                .header("Content-type", "application/json")
-                .body(courier)
-                .when()
-                .post(COURIER_ENDPOINT + "/login");
+        return given().header("Content-type", "application/json").body(courier).when().post(COURIER_ENDPOINT + "/login");
     }
 
     @Step("Извлечение ID курьера из ответа логина")
     public Integer getCourierId(Response loginResponse) {
-        return loginResponse.then()
-                .statusCode(200)
-                .extract()
-                .path("id");
+        return loginResponse.then().statusCode(200).extract().path("id");
     }
 
     @Step("Удаление курьера с ID: {courierId}")
     public void deleteCourier(Integer courierId) {
-        given()
-                .header("Content-type", "application/json")
-                .when()
-                .delete(COURIER_ENDPOINT + "/" + courierId)
-                .then()
-                .statusCode(200)
-                .body("ok", equalTo(true));
+        given().header("Content-type", "application/json").when().delete(COURIER_ENDPOINT + "/" + courierId).then().statusCode(200).body("ok", equalTo(true));
     }
 }

@@ -13,27 +13,17 @@ public class OrderSteps {
 
     @Step("Создание заказа с заданным объектом OrderModel")
     public Response createOrder(OrderModel order) {
-        return given()
-                .header("Content-type", "application/json")
-                .body(order)
-                .when()
-                .post(ORDERS_ENDPOINT);
+        return given().header("Content-type", "application/json").body(order).when().post(ORDERS_ENDPOINT);
     }
 
     @Step("Получить список всех заказов в системе")
     public Response getOrdersList() {
-        return given()
-                .header("Content-type", "application/json")
-                .when()
-                .get(ORDERS_ENDPOINT);
+        return given().header("Content-type", "application/json").when().get(ORDERS_ENDPOINT);
     }
 
     @Step("Извлечение track из ответа заказа")
     public Integer getOrderId(Response response) {
-        return response.then()
-                .statusCode(201)
-                .extract()
-                .path("track");
+        return response.then().statusCode(201).extract().path("track");
     }
 
     @Step("Отмена заказа с номером track: {track}")
@@ -41,13 +31,6 @@ public class OrderSteps {
         if (track == null) {
             throw new IllegalArgumentException("Track ID cannot be null");
         }
-        given()
-                .header("Content-type", "application/json")
-                .queryParam("track", track)
-                .when()
-                .put(ORDERS_ENDPOINT + "/cancel")
-                .then()
-                .statusCode(200)
-                .body("ok", equalTo(true));
+        given().header("Content-type", "application/json").queryParam("track", track).when().put(ORDERS_ENDPOINT + "/cancel").then().statusCode(200).body("ok", equalTo(true));
     }
 }

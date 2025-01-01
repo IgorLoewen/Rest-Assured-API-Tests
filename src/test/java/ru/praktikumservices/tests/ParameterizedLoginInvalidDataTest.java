@@ -50,9 +50,7 @@ public class ParameterizedLoginInvalidDataTest {
     public void validateCourierFields() {
 
         Response response = courierSteps.loginCourier(invalidCourier);
-        response.then()
-                .statusCode(SC_BAD_REQUEST)
-                .body("message", equalTo("Недостаточно данных для входа"));
+        response.then().statusCode(SC_BAD_REQUEST).body("message", equalTo("Недостаточно данных для входа"));
     }
 
     @After

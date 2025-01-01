@@ -50,8 +50,6 @@ public class ParameterizedCourierCreationTest {
     public void validateCourierFields() {
 
         Response response = courierSteps.createCourier(courier);
-        response.then()
-                .statusCode(SC_BAD_REQUEST)
-                .body("message", equalTo("Недостаточно данных для создания учетной записи"));
+        response.then().statusCode(SC_BAD_REQUEST).body("message", equalTo("Недостаточно данных для создания учетной записи"));
     }
 }

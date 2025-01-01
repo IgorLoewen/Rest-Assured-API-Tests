@@ -12,8 +12,9 @@ import ru.praktikumservices.data.CourierTestData;
 import ru.praktikumservices.models.CourierModel;
 import ru.praktikumservices.steps.CourierSteps;
 
+import static org.apache.http.HttpStatus.SC_CONFLICT;
+import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.apache.http.HttpStatus.*;
 
 @Epic("Управление курьерами")
 public class CreateCourierTest {
@@ -32,10 +33,7 @@ public class CreateCourierTest {
     public void courierCanBeCreated() {
         CourierModel courier = CourierTestData.getValidCourier();
 
-        courierSteps.createCourier(courier)
-                .then()
-                .statusCode(SC_CREATED)
-                .body("ok", equalTo(true));
+        courierSteps.createCourier(courier).then().statusCode(SC_CREATED).body("ok", equalTo(true));
     }
 
     @Test
@@ -45,10 +43,7 @@ public class CreateCourierTest {
         CourierModel courier = CourierTestData.getValidCourier();
 
         courierSteps.createCourier(courier);
-        courierSteps.createCourier(courier)
-                .then()
-                .statusCode(SC_CONFLICT)
-                .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
+        courierSteps.createCourier(courier).then().statusCode(SC_CONFLICT).body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
 
 

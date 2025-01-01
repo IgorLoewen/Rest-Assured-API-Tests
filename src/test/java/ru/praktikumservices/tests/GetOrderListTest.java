@@ -37,10 +37,7 @@ public class GetOrderListTest {
 
         orderSteps.getOrdersList()
 
-                .then()
-                .statusCode(SC_OK)
-                .body("orders", not(empty()))
-                .body("orders.id", everyItem(instanceOf(Integer.class)));
+                .then().statusCode(SC_OK).body("orders", not(empty())).body("orders.id", everyItem(instanceOf(Integer.class)));
 
     }
 

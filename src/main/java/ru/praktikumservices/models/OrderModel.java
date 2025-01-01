@@ -22,8 +22,7 @@ public class OrderModel {
     }
 
     // Конструктор с полным набором параметров
-    public OrderModel(String firstName, String lastName, String address, Integer metroStation,
-                      String phone, Integer rentTime, String deliveryDate, String comment, List<String> color) {
+    public OrderModel(String firstName, String lastName, String address, Integer metroStation, String phone, Integer rentTime, String deliveryDate, String comment, List<String> color) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -114,17 +113,7 @@ public class OrderModel {
         // Это полезно, например, в логах, отладке, а также для генерации описания параметров тестов,
         // которое будет отображаться в отчетах, таких как Allure.
 
-        return "OrderModel{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", metroStation=" + metroStation +
-                ", phone='" + phone + '\'' +
-                ", rentTime=" + rentTime +
-                ", deliveryDate='" + deliveryDate + '\'' +
-                ", comment='" + comment + '\'' +
-                ", color=" + color +
-                '}';
+        return "OrderModel{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", address='" + address + '\'' + ", metroStation=" + metroStation + ", phone='" + phone + '\'' + ", rentTime=" + rentTime + ", deliveryDate='" + deliveryDate + '\'' + ", comment='" + comment + '\'' + ", color=" + color + '}';
     }
 
 

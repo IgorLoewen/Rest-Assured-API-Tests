@@ -4,6 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ public class ParameterizedOrderDifferentColorsCreationTest {
 
     private final OrderModel order;
     private OrderSteps orderSteps;
+    private Integer orderId;
 
     public ParameterizedOrderDifferentColorsCreationTest(OrderModel order) {
         this.order = order;
@@ -44,12 +46,14 @@ public class ParameterizedOrderDifferentColorsCreationTest {
     public void shouldCreateOrderWithDifferentColors() {
 
         Response response = orderSteps.createOrder(order);
-        response.then()
-                .statusCode(SC_CREATED)
-                .body("track", instanceOf(Integer.class));
+        response.then().statusCode(SC_CREATED).body("track", instanceOf(Integer.class));
 
-        Integer orderId = orderSteps.getOrderId(response);
+        orderId = orderSteps.getOrderId(response);
 
+    }
+
+    @After
+    public void tearDown() {
         orderSteps.cancelOrder(orderId);
     }
 }

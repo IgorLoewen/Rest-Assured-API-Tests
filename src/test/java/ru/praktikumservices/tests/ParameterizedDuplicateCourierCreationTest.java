@@ -19,12 +19,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 @Feature("Параметризованные тесты: Дублирующий логин")
 @RunWith(Parameterized.class)
-public class ParameterizedDuplicateLoginTest {
+public class ParameterizedDuplicateCourierCreationTest {
 
     private final CourierModel duplicateCourier;
     private CourierSteps courierSteps;
 
-    public ParameterizedDuplicateLoginTest(CourierModel duplicateCourier) {
+    public ParameterizedDuplicateCourierCreationTest(CourierModel duplicateCourier) {
         this.duplicateCourier = duplicateCourier;
     }
 

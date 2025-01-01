@@ -18,12 +18,12 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 
 @Epic("Создание заказов с различными цветами")
 @RunWith(Parameterized.class)
-public class ParameterizedOrderCreationTest {
+public class ParameterizedOrderDifferentColorsCreationTest {
 
     private final OrderModel order;
     private OrderSteps orderSteps;
 
-    public ParameterizedOrderCreationTest(OrderModel order) {
+    public ParameterizedOrderDifferentColorsCreationTest(OrderModel order) {
         this.order = order;
     }
 

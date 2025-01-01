@@ -11,7 +11,7 @@ public class CourierTestData {
     public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru";
 
     // Основные данные для курьера
-    public static final String LOGIN = "п53ывdfdfdfggdfап";
+    public static final String LOGIN = "ASDsjdf";
     public static final String PASSWORD = "1234";
     public static final String FIRST_NAME = "Игорь";
 
@@ -23,8 +23,8 @@ public class CourierTestData {
     // Пустые тела для создания курьера. Разные варианты наборов для теста
     public static List<CourierModel> getInvalidCourierBodies() {
         return Arrays.asList(
-                new CourierModel(null, PASSWORD, FIRST_NAME),
-                new CourierModel(LOGIN, null, FIRST_NAME),
+                new CourierModel("", PASSWORD, FIRST_NAME),
+                new CourierModel(LOGIN, "", FIRST_NAME),
                 new CourierModel("", "", "")
         );
     }

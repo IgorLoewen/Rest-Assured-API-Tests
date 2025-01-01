@@ -11,7 +11,7 @@ public class CourierTestData {
     public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru";
 
     // Основные данные для курьера
-    public static final String LOGIN = "п53ывап";
+    public static final String LOGIN = "п53ывdfdfdfggdfап";
     public static final String PASSWORD = "1234";
     public static final String FIRST_NAME = "Игорь";
 

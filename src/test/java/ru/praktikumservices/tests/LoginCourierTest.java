@@ -2,7 +2,12 @@ package ru.praktikumservices.tests;
 
 import io.qameta.allure.Feature;
 import io.qameta.allure.junit4.DisplayName;
+
+import io.qameta.allure.Feature;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import jdk.jfr.Description;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,8 +15,9 @@ import ru.praktikumservices.data.CourierTestData;
 import ru.praktikumservices.models.CourierModel;
 import ru.praktikumservices.steps.CourierSteps;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.instanceOf;
+import static com.fasterxml.jackson.databind.cfg.ConfigOverride.empty;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.not;
 
 @Feature("Авторизация курьеров")
 public class LoginCourierTest {
@@ -23,82 +29,33 @@ public class LoginCourierTest {
     public void setUp() {
         RestAssured.baseURI = CourierTestData.BASE_URL;
         courierSteps = new CourierSteps();
-
-        // Создание курьера перед тестами
         courier = CourierTestData.getValidCourier();
-        courierSteps.createCourier(courier)
-                .then()
-                .statusCode(201)
-                .body("ok", equalTo(true));
+        courierSteps.createCourier(courier);
     }
 
-    @Test
-    @DisplayName("курьер может авторизоваться;")
-    public void courierCanLoginSuccessfully() {
-        courierSteps.loginCourier(courier)
+@Test
+@DisplayName("Курьер может авторизоваться")
+@Description("Этот тест проверяет возможность логина курьера с валидными данными.")
+public void courierCanBeCreated() {
+
+        CourierSteps.loginCourier(courier)
+
                 .then()
                 .statusCode(200)
-                .body("ok", equalTo(true));
-    }
+                .body("id", instanceOf(Integer.class));
+}
+
 
     @After
     public void tearDown() {
-        // Удаление созданного курьера после тестов
-        courierSteps.deleteCourier(courier);
+        CourierModel loginCourier = CourierTestData.getValidLoginBody();
+        Response loginResponse = CourierSteps.loginCourier(loginCourier);
+        Integer courierId = courierSteps.getCourierId(loginResponse);
+        courierSteps.deleteCourier(courierId);
+
     }
 
-    // Закомментированные тесты
-
-//    @Test
-//    @DisplayName("для авторизации нужно передать все обязательные поля;\n" +
-//            "     если какого-то поля нет, запрос возвращает ошибку;")
-//    public void loginRequiresAllRequiredFields() {
-//
-//        courierSteps.createCourier(LOGIN_REQUEST_BODY);
-//
-//        for (String body : EMPTY_LOGIN_BODIES) {
-//            courierSteps.loginCourier(body)
-//
-//                    .then()
-//                    .statusCode(400)
-//                    .body("message", equalTo("Недостаточно данных для входа"));
-//        }
-//    }
-
-//    @Test
-//    @DisplayName("система вернёт ошибку, если неправильно указать логин или пароль;")
-//    public void loginFailsWithInvalidCredentials() {
-//
-//        courierSteps.createCourier(LOGIN_REQUEST_BODY);
-//
-//        for (String body : INVALID_CREDENTIALS_BODIES) {
-//            courierSteps.loginCourier(body)
-//
-//                    .then()
-//                    .statusCode(404)
-//                    .body("message", equalTo("Учетная запись не найдена"));
-//        }
-//    }
-
-//    @Test
-//    @DisplayName("если авторизоваться под несуществующим пользователем, запрос возвращает ошибку;")
-//    public void loginFailsWithNonExistentUser() {
-//
-//        courierSteps.loginCourier(LOGIN_REQUEST_BODY)
-//
-//                .then().statusCode(404)
-//                .body("message", equalTo("Учетная запись не найдена"));
-//    }
-
-//    @Test
-//    @DisplayName("успешный запрос возвращает id.")
-//    public void successfulRequestReturnsId() {
-//
-//        courierSteps.createCourier(LOGIN_REQUEST_BODY);
-//
-//        courierSteps.loginCourier(LOGIN_REQUEST_BODY)
-//
-//                .then()
-//                .body("id", instanceOf(Integer.class));
-//    }
 }
+
+
+

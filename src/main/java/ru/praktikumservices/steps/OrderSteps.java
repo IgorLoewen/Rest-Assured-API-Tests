@@ -11,22 +11,22 @@ public class OrderSteps {
 
     private static final String ORDERS_ENDPOINT = "/orders";
 
-    @Step("Создание заказа с заданным объектом OrderModel")
+    @Step("Creating an order with the given OrderModel object")
     public Response createOrder(OrderModel order) {
         return given().header("Content-type", "application/json").body(order).when().post(ORDERS_ENDPOINT);
     }
 
-    @Step("Получить список всех заказов в системе")
+    @Step("Retrieving the list of all orders in the system")
     public Response getOrdersList() {
         return given().header("Content-type", "application/json").when().get(ORDERS_ENDPOINT);
     }
 
-    @Step("Извлечение track из ответа заказа")
+    @Step("Extracting track ID from the order response")
     public Integer getOrderId(Response response) {
         return response.then().statusCode(201).extract().path("track");
     }
 
-    @Step("Отмена заказа с номером track: {track}")
+    @Step("Canceling the order with track number: {track}")
     public void cancelOrder(Integer track) {
         if (track == null) {
             throw new IllegalArgumentException("Track ID cannot be null");

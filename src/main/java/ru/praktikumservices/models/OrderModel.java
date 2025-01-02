@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) // Исключает null-поля из JSON
+@JsonInclude(JsonInclude.Include.NON_NULL) // Excludes null fields from JSON
 public class OrderModel {
 
     private String firstName;
@@ -17,11 +17,11 @@ public class OrderModel {
     private String comment;
     private List<String> color;
 
-    // Конструктор без параметров (нужен для сериализации/десериализации)
+    // No-args constructor (required for serialization/deserialization)
     public OrderModel() {
     }
 
-    // Конструктор с полным набором параметров
+    // Constructor with a full set of parameters
     public OrderModel(String firstName, String lastName, String address, Integer metroStation, String phone, Integer rentTime, String deliveryDate, String comment, List<String> color) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,7 +34,7 @@ public class OrderModel {
         this.color = color;
     }
 
-    // Геттеры и сеттеры для всех полей
+    // Getters and setters for all fields
     public String getFirstName() {
         return firstName;
     }
@@ -109,12 +109,10 @@ public class OrderModel {
 
     @Override
     public String toString() {
-        // Метод toString используется для удобного отображения информации об объекте.
-        // Это полезно, например, в логах, отладке, а также для генерации описания параметров тестов,
-        // которое будет отображаться в отчетах, таких как Allure.
+        // The toString method is used for convenient display of object information.
+        // This is useful, for example, in logs, debugging, and for generating descriptions of test parameters
+        // that will be displayed in reports such as Allure.
 
         return "OrderModel{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", address='" + address + '\'' + ", metroStation=" + metroStation + ", phone='" + phone + '\'' + ", rentTime=" + rentTime + ", deliveryDate='" + deliveryDate + '\'' + ", comment='" + comment + '\'' + ", color=" + color + '}';
     }
-
-
 }

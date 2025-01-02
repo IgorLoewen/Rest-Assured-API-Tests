@@ -16,7 +16,7 @@ import static org.apache.http.HttpStatus.SC_CONFLICT;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-@Epic("Управление курьерами")
+@Epic("Courier Management")
 public class CreateCourierTest {
 
     private CourierSteps courierSteps;
@@ -28,8 +28,8 @@ public class CreateCourierTest {
     }
 
     @Test
-    @DisplayName("Курьера можно создать")
-    @Description("Этот тест проверяет возможность создания курьера с валидными данными.")
+    @DisplayName("Courier can be created")
+    @Description("This test checks the possibility of creating a courier with valid data.")
     public void courierCanBeCreated() {
         CourierModel courier = CourierTestData.getValidCourier();
 
@@ -37,8 +37,8 @@ public class CreateCourierTest {
     }
 
     @Test
-    @DisplayName("Нельзя создать двух одинаковых курьеров")
-    @Description("Этот тест проверяет, что невозможно создать двух курьеров с одинаковыми данными. Ожидается, что при попытке создания второго курьера будет возвращён соответствующий код ошибки.")
+    @DisplayName("Cannot create duplicate couriers")
+    @Description("This test checks that it is not possible to create two couriers with the same data. When attempting to create a second courier, the expected error code is returned.")
     public void courierCanNotBeCreatedTwice() {
         CourierModel courier = CourierTestData.getValidCourier();
 
@@ -46,14 +46,11 @@ public class CreateCourierTest {
         courierSteps.createCourier(courier).then().statusCode(SC_CONFLICT).body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
 
-
     @After
     public void tearDown() {
         CourierModel loginCourier = CourierTestData.getValidLoginBody();
         Response loginResponse = CourierSteps.loginCourier(loginCourier);
         Integer courierId = courierSteps.getCourierId(loginResponse);
         courierSteps.deleteCourier(courierId);
-
     }
-
 }

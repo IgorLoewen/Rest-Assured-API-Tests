@@ -1,22 +1,22 @@
-# Исключить временные файлы IntelliJ IDEA
+# Exclude IntelliJ IDEA temporary files
 .idea/
 *.iml
 
-# Исключить папки Maven
+# Exclude Maven folders
 target/
 logs/
 
-# Исключить временные файлы Allure
+# Exclude Allure temporary files
 allure-results/
 .allure/
 
-# Исключить системные файлы
+# Exclude system files
 *.class
 *.log
 *.tmp
 *.swp
 .DS_Store
 
-# Исключить настройки ОС
+# Exclude OS-specific settings
 Thumbs.db
 *.~lock.*

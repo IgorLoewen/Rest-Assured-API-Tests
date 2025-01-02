@@ -2,25 +2,25 @@ package ru.praktikumservices.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_NULL) // Исключает null-поля из JSON
+@JsonInclude(JsonInclude.Include.NON_NULL) // Excludes null fields from JSON
 public class CourierModel {
 
     private String login;
     private String password;
     private String firstName;
 
-    // Конструктор без параметров (нужен для сериализации/десериализации)
+    // No-args constructor (required for serialization/deserialization)
     public CourierModel() {
     }
 
-    // Конструктор с основными параметрами
+    // Constructor with main parameters
     public CourierModel(String login, String password, String firstName) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
     }
 
-    // Геттеры и сеттеры для всех полей
+    // Getters and setters for all fields
     public String getLogin() {
         return login;
     }
@@ -48,9 +48,9 @@ public class CourierModel {
     @Override
     public String toString() {
 
-        // Метод toString используется для удобного отображения информации об объекте.
-        // Это полезно, например, в логах, отладке, а также для генерации описания параметров тестов,
-        // которое будет отображаться в отчетах, таких как Allure.
+        // The toString method is used for convenient display of object information.
+        // This is useful, for example, in logs, debugging, and for generating descriptions of test parameters
+        // that will be displayed in reports such as Allure.
         return "CourierModel{" + "login='" + login + '\'' + ", password='" + password + '\'' + ", firstName='" + firstName + '\'' + '}';
     }
 

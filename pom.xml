@@ -7,14 +7,14 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <!-- Версия Java -->
+        <!-- Java version for compilation -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-        <!-- JUnit 4 для тестов -->
+        <!-- JUnit 4 for writing tests -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -22,14 +22,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- RestAssured для работы с API -->
+        <!-- RestAssured for testing APIs -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>5.3.0</version>
         </dependency>
 
-        <!-- Hamcrest для ассертов -->
+        <!-- Hamcrest for assertions -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-core</artifactId>
@@ -37,28 +37,28 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Allure Java Commons -->
+        <!-- Allure Java Commons for reporting -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-java-commons</artifactId>
             <version>2.21.0</version>
         </dependency>
 
-        <!-- Allure RestAssured -->
+        <!-- Allure RestAssured integration -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-rest-assured</artifactId>
             <version>2.21.0</version>
         </dependency>
 
-        <!-- Allure JUnit 4 -->
+        <!-- Allure JUnit 4 integration -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit4</artifactId>
             <version>2.22.0</version>
         </dependency>
 
-        <!-- Jackson для работы с JSON -->
+        <!-- Jackson for JSON handling -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -68,7 +68,7 @@
 
     <build>
         <plugins>
-            <!-- Maven Surefire Plugin для запуска тестов -->
+            <!-- Maven Surefire Plugin for running tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -81,19 +81,21 @@
                         </property>
                     </properties>
                     <systemPropertyVariables>
+                        <!-- Directory for storing Allure results -->
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
 
-
-            <!-- Плагин для Allure -->
+            <!-- Allure Maven Plugin for report generation -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>2.10.0</version>
                 <configuration>
+                    <!-- Directory for storing Allure results -->
                     <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                    <!-- Directory for generating Allure reports -->
                     <reportDirectory>${project.build.directory}/allure-report</reportDirectory>
                 </configuration>
             </plugin>

@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.everyItem;
 
-@Epic("Работа с заказами")
+@Epic("Order Management")
 public class GetOrderListTest {
 
     private OrderSteps orderSteps;
@@ -26,13 +26,9 @@ public class GetOrderListTest {
         orderSteps = new OrderSteps();
     }
 
-
-    /// !!! Ручка слетает переодически Ответ 504 !!! Но тест рабочий.  HTTP чаще ответ возвращает, чем HTTPS
-    //"В Allure есть отчет GetOrderListTest теста, который переодически слетает из за ошибки на сервере"
-    // Я его специально загрузил, после того как пришел положительный ответ теста!!!
     @Test
-    @DisplayName("Проверь, что в тело ответа возвращается список заказов.")
-    @Description("Этот тест проверяет, что в ответе на запрос возвращается корректный список заказов. Ожидается, что поле, содержащее заказы, присутствует и содержит данные в правильном формате.")
+    @DisplayName("Verify that the response body contains a list of orders.")
+    @Description("This test checks that the response to the request contains a correct list of orders. It is expected that the field containing orders is present and contains data in the correct format.")
     public void getOrdersList() {
 
         orderSteps.getOrdersList()
@@ -40,6 +36,5 @@ public class GetOrderListTest {
                 .then().statusCode(SC_OK).body("orders", not(empty())).body("orders.id", everyItem(instanceOf(Integer.class)));
 
     }
-
 
 }

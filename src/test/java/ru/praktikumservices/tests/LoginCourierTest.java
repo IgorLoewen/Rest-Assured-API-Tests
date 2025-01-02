@@ -17,8 +17,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 
-
-@Epic("Авторизация курьеров")
+@Epic("Courier Authorization")
 public class LoginCourierTest {
 
     private CourierSteps courierSteps;
@@ -33,37 +32,41 @@ public class LoginCourierTest {
     }
 
     @Test
-    @DisplayName("Курьер может авторизоваться")
-    @Description("Этот тест проверяет возможность логина курьера с валидными данными.")
+    @DisplayName("Courier can log in")
+    @Description("This test verifies the ability of a courier to log in with valid credentials.")
     public void courierCanLogin() {
 
         CourierSteps.loginCourier(courier)
-
-                .then().statusCode(SC_OK).body("id", instanceOf(Integer.class));
+                .then()
+                .statusCode(SC_OK)
+                .body("id", instanceOf(Integer.class));
     }
 
     @Test
-    @DisplayName("если авторизоваться под несуществующим пользователем, запрос возвращает ошибку;")
-    @Description("Этот тест проверяет ошибку логина курьера с несуществующими пользователем.")
+    @DisplayName("If logging in with a non-existent user, the request returns an error.")
+    @Description("This test verifies the error when a courier logs in with a non-existent user.")
     public void courierCanNotLoginWithoutRegistration() {
 
         CourierModel notRegisteredCourier = CourierTestData.getCourierWithInvalidLogin();
 
         CourierSteps.loginCourier(notRegisteredCourier)
-
-                .then().statusCode(SC_NOT_FOUND).body("message", equalTo("Учетная запись не найдена"));
+                .then()
+                .statusCode(SC_NOT_FOUND)
+                .body("message", equalTo("Учетная запись не найдена"));
     }
 
     @Test
-    @DisplayName("если авторизоваться с неверным паролем, запрос возвращает ошибку")
-    @Description("Этот тест проверяет ошибку логина курьера с неверным паролем.")
+    @DisplayName("If logging in with an incorrect password, the request returns an error.")
+    @Description("This test verifies the error when a courier logs in with an incorrect password.")
     public void courierCanNotLoginWithInvalidPassword() {
 
         CourierModel courierWithInvalidPassword = CourierTestData.getCourierWithInvalidPassword();
 
-        CourierSteps.loginCourier(courierWithInvalidPassword).then().statusCode(SC_NOT_FOUND).body("message", equalTo("Учетная запись не найдена"));
+        CourierSteps.loginCourier(courierWithInvalidPassword)
+                .then()
+                .statusCode(SC_NOT_FOUND)
+                .body("message", equalTo("Учетная запись не найдена"));
     }
-
 
     @After
     public void tearDown() {
@@ -71,10 +74,6 @@ public class LoginCourierTest {
         Response loginResponse = CourierSteps.loginCourier(loginCourier);
         Integer courierId = courierSteps.getCourierId(loginResponse);
         courierSteps.deleteCourier(courierId);
-
     }
 
 }
-
-
-

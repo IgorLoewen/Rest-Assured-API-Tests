@@ -18,7 +18,7 @@ import java.util.Collection;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-@Epic("Параметризованные тесты: Логин курьера")
+@Epic("Parameterized Tests: Courier Login")
 @RunWith(Parameterized.class)
 public class ParameterizedLoginInvalidDataTest {
 
@@ -29,11 +29,9 @@ public class ParameterizedLoginInvalidDataTest {
         this.invalidCourier = invalidCourier;
     }
 
-    @Parameterized.Parameters(name = "Тест {index}: {0}")
+    @Parameterized.Parameters(name = "Test {index}: {0}")
     public static Collection<CourierModel> testData() {
-
         return CourierTestData.getInvalidCourierBodies();
-
     }
 
     @Before
@@ -42,15 +40,15 @@ public class ParameterizedLoginInvalidDataTest {
         courierSteps = new CourierSteps();
         CourierModel courier = CourierTestData.getValidCourier();
         courierSteps.createCourier(courier);
-
     }
 
     @Test
-    @Description("Тест проверяет логин курьера с различными комбинациями обязательных полей.")
+    @Description("This test verifies courier login with various combinations of required fields.")
     public void validateCourierFields() {
-
         Response response = courierSteps.loginCourier(invalidCourier);
-        response.then().statusCode(SC_BAD_REQUEST).body("message", equalTo("Недостаточно данных для входа"));
+        response.then()
+                .statusCode(SC_BAD_REQUEST)
+                .body("message", equalTo("Недостаточно данных для входа"));
     }
 
     @After
@@ -59,6 +57,5 @@ public class ParameterizedLoginInvalidDataTest {
         Response loginResponse = CourierSteps.loginCourier(loginCourier);
         Integer courierId = courierSteps.getCourierId(loginResponse);
         courierSteps.deleteCourier(courierId);
-
     }
 }

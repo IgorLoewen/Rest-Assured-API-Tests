@@ -7,20 +7,20 @@ import java.util.List;
 
 public class CourierTestData {
 
-    // Главный url
+    // Main URL
     public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru";
 
-    // Основные данные для курьера
-    public static final String LOGIN = "ASDsjdf";
+    // Main data for the courier
+    public static final String LOGIN = "iloewen79@gmx.de";
     public static final String PASSWORD = "1234";
-    public static final String FIRST_NAME = "Игорь";
+    public static final String FIRST_NAME = "Igor";
 
-    // Валидное тело для создания курьера
+    // Valid body for creating a courier
     public static CourierModel getValidCourier() {
         return new CourierModel(LOGIN, PASSWORD, FIRST_NAME);
     }
 
-    // Пустые тела для создания курьера. Разные варианты наборов для теста
+    // Empty bodies for creating a courier. Various combinations for testing
     public static List<CourierModel> getInvalidCourierBodies() {
         return Arrays.asList(
                 new CourierModel("", PASSWORD, FIRST_NAME),
@@ -29,12 +29,12 @@ public class CourierTestData {
         );
     }
 
-    // Валидное тело для логина курьера
+    // Valid body for courier login
     public static CourierModel getValidLoginBody() {
         return new CourierModel(LOGIN, PASSWORD, null);
     }
 
-    // Отсутствие обязательных полей для тестирования
+    // Missing required fields for testing
     public static List<CourierModel> getMissingRequiredFields() {
         return Arrays.asList(
                 new CourierModel(null, PASSWORD, FIRST_NAME),
@@ -43,7 +43,7 @@ public class CourierTestData {
         );
     }
 
-    // Набор данных полей с одинаковым логином и разные данные в полях
+    // Dataset with the same login but different field values
     public static List<CourierModel> getDuplicateLoginCouriers() {
         return Arrays.asList(
                 new CourierModel(LOGIN, "12345", "Test1"),
@@ -52,13 +52,13 @@ public class CourierTestData {
         );
     }
 
-    // Тело для логина с неправильным логином
+    // Body for login with an invalid login
     public static CourierModel getCourierWithInvalidLogin() {
-        return new CourierModel("несуществующийЛогин", PASSWORD, FIRST_NAME);
+        return new CourierModel("InvalidLogin", PASSWORD, FIRST_NAME);
     }
 
-    // Тело для логина с неправильным паролем
+    // Body for login with an invalid password
     public static CourierModel getCourierWithInvalidPassword() {
-        return new CourierModel(LOGIN, "неправильныйПароль", FIRST_NAME);
+        return new CourierModel(LOGIN, "InvalidPassword", FIRST_NAME);
     }
 }

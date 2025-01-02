@@ -18,7 +18,7 @@ import java.util.Collection;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.hamcrest.CoreMatchers.instanceOf;
 
-@Epic("Создание заказов с различными цветами")
+@Epic("Order Creation with Different Colors")
 @RunWith(Parameterized.class)
 public class ParameterizedOrderDifferentColorsCreationTest {
 
@@ -30,7 +30,7 @@ public class ParameterizedOrderDifferentColorsCreationTest {
         this.order = order;
     }
 
-    @Parameterized.Parameters(name = "Тест {index}: {0}")
+    @Parameterized.Parameters(name = "Test {index}: {0}")
     public static Collection<OrderModel> testData() {
         return ru.praktikumservices.data.OrderTestData.getOrdersWithOptionalColors();
     }
@@ -42,14 +42,15 @@ public class ParameterizedOrderDifferentColorsCreationTest {
     }
 
     @Test
-    @Description("Тест проверяет создание заказа с разными комбинациями.")
+    @Description("This test verifies the creation of orders with different color combinations.")
     public void shouldCreateOrderWithDifferentColors() {
 
         Response response = orderSteps.createOrder(order);
-        response.then().statusCode(SC_CREATED).body("track", instanceOf(Integer.class));
+        response.then()
+                .statusCode(SC_CREATED)
+                .body("track", instanceOf(Integer.class));
 
         orderId = orderSteps.getOrderId(response);
-
     }
 
     @After

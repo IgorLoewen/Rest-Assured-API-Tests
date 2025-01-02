@@ -18,7 +18,7 @@ import java.util.Collection;
 import static org.apache.http.HttpStatus.SC_CONFLICT;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-@Epic("Параметризованные тесты: Дублирующий логин")
+@Epic("Parameterized Tests: Duplicate Login")
 @RunWith(Parameterized.class)
 public class ParameterizedDuplicateCourierCreationTest {
 
@@ -29,7 +29,7 @@ public class ParameterizedDuplicateCourierCreationTest {
         this.duplicateCourier = duplicateCourier;
     }
 
-    @Parameterized.Parameters(name = "Тест {index}: {0}")
+    @Parameterized.Parameters(name = "Test {index}: {0}")
     public static Collection<CourierModel> testData() {
         return CourierTestData.getDuplicateLoginCouriers();
     }
@@ -43,9 +43,12 @@ public class ParameterizedDuplicateCourierCreationTest {
     }
 
     @Test
-    @Description("Этот тест проверяет, что невозможно создать двух курьеров с одинаковым логином, но разными остальными данными.")
+    @Description("This test verifies that it is not possible to create two couriers with the same login but different other data.")
     public void validateDuplicateLogin() {
-        courierSteps.createCourier(duplicateCourier).then().statusCode(SC_CONFLICT).body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
+        courierSteps.createCourier(duplicateCourier)
+                .then()
+                .statusCode(SC_CONFLICT)
+                .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
 
     @After

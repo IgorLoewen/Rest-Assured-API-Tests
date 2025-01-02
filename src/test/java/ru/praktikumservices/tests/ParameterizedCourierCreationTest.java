@@ -19,7 +19,7 @@ import java.util.List;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-@Epic("Параметризованные тесты: Создание курьера")
+@Epic("Parameterized Tests: Courier Creation")
 @RunWith(Parameterized.class)
 public class ParameterizedCourierCreationTest {
 
@@ -30,7 +30,7 @@ public class ParameterizedCourierCreationTest {
         this.courier = courier;
     }
 
-    @Parameterized.Parameters(name = "Тест {index}: {0}")
+    @Parameterized.Parameters(name = "Test {index}: {0}")
     public static Collection<CourierModel> testData() {
 
         List<CourierModel> testData = new ArrayList<>();
@@ -46,10 +46,12 @@ public class ParameterizedCourierCreationTest {
     }
 
     @Test
-    @Description("Тест проверяет создание курьера с различными комбинациями обязательных полей.")
+    @Description("This test verifies courier creation with various combinations of required fields.")
     public void validateCourierFields() {
 
         Response response = courierSteps.createCourier(courier);
-        response.then().statusCode(SC_BAD_REQUEST).body("message", equalTo("Недостаточно данных для создания учетной записи"));
+        response.then()
+                .statusCode(SC_BAD_REQUEST)
+                .body("message", equalTo("Недостаточно данных для создания учетной записи"));
     }
 }
